@@ -1,0 +1,63 @@
+{
+    "extractors": {
+        "header": [
+            {
+                "name" : "Accept",
+                "regex": "(.*)",
+                "property" : "AcceptHeader",
+                "identifier": ""
+            }
+        ]
+    },
+    "translators": {},
+    "domains": [
+        {
+            "domain": "google.com",
+            "extractors": {},
+            "translators": {},
+            "pages": [
+                {
+                    "regex": "/sample_page.js",
+                    "extractors": {
+                        "header": [
+                            {
+                                "name": "Special",
+                                "regex": "a(.*)f",
+                                "property": "SpecialHeader",
+                                "identifier": ""
+                            }
+                        ]
+                    },
+                    "translators": {
+                        "case": [
+                            {
+                                "case": "upper",
+                                "property": "SpecialHeader",
+                                "identifier": ""
+                            }
+                        ]
+                    },
+                    "logics": {
+                        "default": {
+                            "filters": {
+                                "regex": [
+                                    {
+                                        "property": "AcceptHeader",
+                                        "identifier": "",
+                                        "allow_missing": false,
+                                        "white_list": [
+                                            "\\*\/\\*"
+                                        ],
+                                        "black_list": []
+                                    }
+                                ]
+                            },
+                            "reactors": {},
+                            "builder": "default"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
